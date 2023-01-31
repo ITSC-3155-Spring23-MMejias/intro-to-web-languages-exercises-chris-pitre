@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 7</title>
+</head>
+<body>
+<input type="text" id="txt-price" placeholder="Enter the price of the item">
+<input type="text" id="txt-quantity" placeholder="Enter the quanity of the item">
+<button id="btn-submit">Calculate</button>
+<div id="output"></div>
+
+<script>
+    /*
+    * Sets variables to html elements
+    * priceInput is the text box that says "Enter the price of the item"
+    * quantityInput is the textbox that says "Enter the quantity of the item"
+    * submitBtn is the button that says "Calculate"
+    * output is a div that contains no text until the script runs
+    */
+    var priceInput = document.getElementById('txt-price');
+    var quantityInput = document.getElementById('txt-quantity');
+    var submitBtn = document.getElementById('btn-submit');
+    var output = document.getElementById('output');
+
+    //This line creates a function which waits for each click on submitBtn
+    submitBtn.addEventListener('click', function () {
+        /*
+        * Creates variables from each html element
+        * price from priceInput
+        * quantity from quantityInput
+        */
+        var price = priceInput.value;
+        var quanity = quantityInput.value;
+        /*
+        * These lines convert from string to float
+        * If impossible to convert to float (e.g. an alphabetical character is inputted)
+        * then variable becomes NaN
+        */
+        price = +price;
+        quanity = +quanity;
+        //Validates user input, if user input is not a number, then outputs "Invalid input"
+        if (Number.isNaN(price) || Number.isNaN(quanity)) {
+            output.innerHTML = 'Invalid input';
+            return;
+        }
+        // Calculates total price of purchase
+        var totalPrice = price * quanity;
+        // Multiplies total price by 100, then rounds totalPrice to closest number, and then divides by 100 to get a price with cents
+        totalPrice = Math.round(totalPrice * 100) / 100;
+        //Displays the total price to the webpage
+        output.innerHTML = quanity + ' items at $' + price + ' each is $' + totalPrice;
+    });
+</script>
+</body>
+</html>
